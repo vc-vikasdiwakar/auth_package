@@ -1,13 +1,13 @@
 <?php
 
 use Authenticate\Role\Http\Controllers\ValidUser;
-use Authenticate\Role\Http\Middleware\checkAuth;
+use Authenticate\Role\Http\Middleware\CheckAuth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/checkwithout',[ValidUser::class,'index'])->name('check-auth');
 Route::any('/post-data',[ValidUser::class,'postData'])->name('post-data');
 
-Route::middleware([checkAuth::class])->group(function(){
+Route::middleware([CheckAuth::class])->group(function(){
 	Route::get('/checkAuth',function(){
         return "Authenticated";
     });
