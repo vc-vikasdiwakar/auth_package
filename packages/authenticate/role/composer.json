@@ -1,0 +1,30 @@
+{
+    "name": "vikasdiwakar1/checkauth",
+    "description": "this is demo of authentication",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "vc-vikasdiwakar",
+            "email": "vikas.diwakar@viitor.cloud"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Authenticate\\Role\\": "packages/authenticate/role/src/"
+        }
+    },
+    
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Authenticate\\Role\\CheckAuthServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require": {}
+}
