@@ -27,7 +27,7 @@ class ValidUser extends Controller
         $link =URL::route('post-data');
         $data = [
             'link'=>$link,
-            'name' =>'Admin',
+            'name' =>'Viitor cloud',
             'password' => $password
         ];
        /* Admin mail*/
