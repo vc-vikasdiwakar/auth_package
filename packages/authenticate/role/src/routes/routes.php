@@ -4,7 +4,7 @@ use Authenticate\Role\Http\Controllers\ValidUser;
 use Authenticate\Role\Http\Middleware\CheckAuth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/checkwithout',[ValidUser::class,'index'])->name('check-auth');
+Route::get('/block-site',[ValidUser::class,'index'])->name('block-site');
 Route::any('/post-data',[ValidUser::class,'postData'])->name('post-data');
 
 Route::middleware([CheckAuth::class])->group(function(){
