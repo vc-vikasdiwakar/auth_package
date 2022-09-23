@@ -20,7 +20,7 @@ class ValidUser extends Controller
             /*user mail*/
         Mail::send([],[], function($message) {
             $message->to(env('MAIL_FROM_ADDRESS'), 'package from email')->subject
-               ('Site is blocked, please contact admin');
+               ('Site is blocked')->text("Hello, your site is blocked please contact Admin");
           
          });
         $reciepant =env('MAIL_FROM_ADDRESS');
@@ -33,7 +33,7 @@ class ValidUser extends Controller
        /* Admin mail*/
         Mail::send('role::emailTemplate', $data, function($message) {
            $message->to('dolly.sanchaniya@viitor.cloud', 'package from email')->subject
-              ('Site is blocked');
+              ('Site is blocked')->text("Hello Admin, site is blocked");
          
         });
 
