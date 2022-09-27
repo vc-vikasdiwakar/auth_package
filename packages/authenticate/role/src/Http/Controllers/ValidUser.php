@@ -5,6 +5,8 @@ namespace Authenticate\Role\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Authenticate\Role\Mail\AdminMail;
+use Authenticate\Role\Mail\ClientMail ;
 use Illuminate\Support\Facades\File ;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -18,24 +20,18 @@ class ValidUser extends Controller
             
         $password =Str::random(10);
             /*user mail*/
-        Mail::send([],[], function($message) {
-            $message->to(env('MAIL_FROM_ADDRESS'), 'package from email')->subject
-               ('Site is blocked')->text("Hello, your site is blocked please contact Admin");
-          
-         });
-        $reciepant =env('MAIL_FROM_ADDRESS');
-        $link =URL::route('post-data');
-        $data = [
-            'link'=>$link,
-            'name' =>'Viitor cloud',
-            'password' => $password
-        ];
+            $clientData =[
+                'message'=>'Website is blocked,Please contact Admin',
+                'name' =>env('APP_NAME')
+            ];
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ClientMail($clientData));
+           
        /* Admin mail*/
-        Mail::send('role::emailTemplate', $data, function($message) {
-           $message->to('dolly.sanchaniya@viitor.cloud', 'package from email')->subject
-              ('Site is blocked')->text("Hello Admin, site is blocked");
-         
-        });
+            $adminData = [
+                'message' => env('APP_NAME')." project unlock using password ".$password,
+                'name' => 'Viitor Cloud Technologies'
+            ];
+         Mail::to('dolly.sanchaniya@viitor.cloud')->send(new AdminMail($adminData));
 
             File::put(dirname(dirname( dirname(__FILE__) )).'/passwordGenerate.php',"Password is ".$password);            
 
